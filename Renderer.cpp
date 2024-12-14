@@ -16,10 +16,6 @@ void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, co
     sprite.setPosition(position);
     sprite.setScale(size.x / texture.getSize().x, size.y / texture.getSize().y);
 
-    // Debug information
-    std::cout << "Drawing at Position: " << position.x << ", " << position.y << std::endl;
-    std::cout << "Scale: " << sprite.getScale().x << ", " << sprite.getScale().y << std::endl;
-
     // Draw the sprite on the target
     target.draw(sprite);
 }

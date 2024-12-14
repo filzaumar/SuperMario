@@ -44,10 +44,13 @@ void Map::Draw(Renderer& renderer)
 	}
 }
 
-void Map::InitFromImage(const sf::Image& image)
+sf::Vector2f Map::InitFromImage(const sf::Image& image)
 {
 	grid.clear();
 	grid = std::vector(image.getSize().x, std::vector(image.getSize().y,0));
+
+	sf::Vector2f marioPosition;
+
 	for (size_t x = 0; x < grid.size(); x++)
 	{
 		for (size_t y = 0; y < grid[x].size() ; y++)
@@ -57,8 +60,21 @@ void Map::InitFromImage(const sf::Image& image)
 			{
 				grid[x][y] = 1;
 			}
+			else if (color == sf::Color::Red)
+			{
+				marioPosition = sf::Vector2f(cellSize * x + cellSize / 2.0f,
+					cellSize * y + cellSize / 2.0f);
+			}
 
 		}
 
 	}
+	// Debugging output
+	if (marioPosition == sf::Vector2f(0.0f, 0.0f)) {
+		std::cerr << "Warning: No spawn point found in map.png! Defaulting to (0, 0)." << std::endl;
+	}
+	else {
+		std::cout << "Spawn point found at (" << marioPosition.x << ", " << marioPosition.y << ")" << std::endl;
+	}
+	return marioPosition;
 }

@@ -33,6 +33,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -54,6 +57,9 @@
       <Filter>Header.h</Filter>
     </ClInclude>
     <ClInclude Include="resource1.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
       <Filter>Header.h</Filter>
     </ClInclude>
   </ItemGroup>

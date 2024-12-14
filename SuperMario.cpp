@@ -12,7 +12,6 @@ int main()
     // Create the renderer
     Renderer renderer(window);
 
-    
 
     // Clock for frame timing
     sf::Clock deltaClock;
