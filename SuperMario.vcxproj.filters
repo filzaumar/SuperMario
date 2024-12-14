@@ -27,6 +27,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -39,6 +42,9 @@
       <Filter>Header.h</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
       <Filter>Header.h</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,17 +1,21 @@
 #include "Game.h"
+#include "Resources.h"
+#include<filesystem>
+#include<iostream>
 
-
-sf::Texture texture;
 
 void Begin()
 {
     // Load the texture
-    if (!texture.loadFromFile("brick.png"))
+    for (auto& file : std::filesystem::directory_iterator("./resources/textures/"))
     {
-        std::cerr << "Failed to load texture." << std::endl;
-        exit(-1); // Exit the program if texture loading fails
+        if (file.is_regular_file() && file.path().extension() == ".png" || file.path().extension()==".jpg")
+        {
+            Resources::textures[file.path().filename().string()].loadFromFile(file.path().string());
+        }
+
     }
-    std::cout << "Loaded texture. Size: " << texture.getSize().x << " x " << texture.getSize().y << std::endl;
+   
 }
 
 void Update(float deltaTime)
@@ -28,7 +32,7 @@ void Render(Renderer& renderer)
     sf::Vector2f size(16.f, 16.f);
 
     // Draw the texture with the new position and size
-    renderer.Draw(texture, position, size);
+    renderer.Draw(Resources::textures["mario.png"], position, size);
     // Draw the texture at position (200, 200) and scale it to its original size
   //  renderer.Draw(texture, sf::Vector2f(200.f, 200.f), sf::Vector2f(texture.getSize().x, texture.getSize().y));
 }
