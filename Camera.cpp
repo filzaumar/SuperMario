@@ -17,5 +17,5 @@ sf::View Camera::GetView(sf::Vector2u windowSize)
 	}
 
 
-	return sf::View(sf::Vector2f(300,200), size);
+	return sf::View(position, size);
 }

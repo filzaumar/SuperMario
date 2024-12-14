@@ -8,4 +8,5 @@ public:
     sf::View GetView(sf::Vector2u windowSize);
   
     float zoomLevel; // Zoom level of the camera
+    sf::Vector2f position;
 };

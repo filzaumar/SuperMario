@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="SuperMario.cpp" />
@@ -144,12 +145,18 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="Resources.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\brick.png" />
+    <Image Include="resources\Image\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperMario.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

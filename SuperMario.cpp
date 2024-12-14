@@ -8,12 +8,11 @@ int main()
 {
     // Create the SFML window
     sf::RenderWindow window(sf::VideoMode(1020, 500), "Super Mario!");
-
+   
     // Create the renderer
     Renderer renderer(window);
 
-    // Create the camera with a zoom level
-    Camera camera(100.f);
+    
 
     // Clock for frame timing
     sf::Clock deltaClock;

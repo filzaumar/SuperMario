@@ -3,6 +3,9 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include"Renderer.h"
+#include "Camera.h"
+
+extern Camera camera;
 
 void Begin();
 void Update(float deltaTime);

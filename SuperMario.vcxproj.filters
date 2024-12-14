@@ -30,6 +30,9 @@
     <ClCompile Include="Resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -47,10 +50,24 @@
     <ClInclude Include="Resources.h">
       <Filter>Header.h</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\brick.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\Image\map.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperMario.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

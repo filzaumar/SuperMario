@@ -1,7 +1,14 @@
 #include "Game.h"
 #include "Resources.h"
+#include "Map.h"
+
 #include<filesystem>
 #include<iostream>
+
+Map map(16.0f);
+// Create the camera with a zoom level
+Camera camera(250.f);
+const float movementSpeed = 180.0f; //for camera basically to see tile map
 
 
 void Begin()
@@ -15,24 +22,45 @@ void Begin()
         }
 
     }
+
+    sf::Image image;
+    image.loadFromFile("resources/image/map.png");
+    map.InitFromImage(image);
+
+    camera.position= sf::Vector2f(160.0f, 160.0f);
+   
    
 }
 
 void Update(float deltaTime)
 {
-    // Placeholder for updating game logic
+    float move = movementSpeed;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    {
+        move*=2;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        camera.position.x += move * deltaTime;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        camera.position.x -= move * deltaTime;
+    }
 }
 
 void Render(Renderer& renderer)
 {
+    map.Draw(renderer);
+    /*
     // Set position to (300, 200)
-    sf::Vector2f position(300.f, 200.f);
+    sf::Vector2f position;
 
     // Scale the texture to 200x200 pixels (larger than its original size)
     sf::Vector2f size(16.f, 16.f);
 
     // Draw the texture with the new position and size
     renderer.Draw(Resources::textures["mario.png"], position, size);
-    // Draw the texture at position (200, 200) and scale it to its original size
-  //  renderer.Draw(texture, sf::Vector2f(200.f, 200.f), sf::Vector2f(texture.getSize().x, texture.getSize().y));
+    */
 }
