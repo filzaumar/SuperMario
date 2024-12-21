@@ -62,6 +62,7 @@ sf::Vector2f Map::InitFromImage(const sf::Image& image)
 			if (color == sf::Color::Black)
 			{
 				grid[x][y] = 1;
+				//Static body physics
 				b2BodyDef bodyDef{};
 				bodyDef.position.Set(cellSize * x + cellSize / 2.0f,
 					cellSize * y + cellSize / 2.0f);

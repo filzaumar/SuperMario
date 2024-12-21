@@ -5,7 +5,7 @@
 Renderer::Renderer(sf::RenderTarget& target) : target(target) {}
 
 // Draw Method
-void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, const sf::Vector2f& size)
+void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, const sf::Vector2f& size, float angle)
 {
     sprite.setTexture(texture);
 
@@ -14,8 +14,9 @@ void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, co
 
     // Set position and scale based on arguments
     sprite.setPosition(position);
+    sprite.setRotation(angle);
     sprite.setScale(size.x / texture.getSize().x, size.y / texture.getSize().y);
-
+    
     // Draw the sprite on the target
     target.draw(sprite);
 }

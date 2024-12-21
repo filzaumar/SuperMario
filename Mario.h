@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"Renderer.h"
+#include<box2d/b2_body.h>
 class Mario
 {
 private:
