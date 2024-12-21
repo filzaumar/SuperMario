@@ -36,6 +36,9 @@
     <ClCompile Include="Mario.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -62,12 +65,18 @@
     <ClInclude Include="Mario.h">
       <Filter>Header.h</Filter>
     </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\brick.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="resources\Image\map.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\mario.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

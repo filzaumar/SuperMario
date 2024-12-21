@@ -4,6 +4,12 @@
 #include <iostream>
 #include"Renderer.h"
 #include "Camera.h"
+#include "Resources.h"
+#include "Map.h"
+#include "Mario.h"
+#include "Physics.h"
+#include<filesystem>
+#include<iostream>
 
 extern Camera camera;
 

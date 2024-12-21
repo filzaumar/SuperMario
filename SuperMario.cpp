@@ -16,6 +16,7 @@ int main()
     // Clock for frame timing
     sf::Clock deltaClock;
 
+    window.setFramerateLimit(60); //Shouldnt go below 60 for 2d games
     // Initialize game resources
     Begin();
 

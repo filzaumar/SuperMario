@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+project(SuperMario)
+
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 14)
+
+# Specify the correct SFML directory where SFMLConfig.cmake is located
+set(SFML_DIR "C:/Users/Filza/Desktop/project folder/SuperMario/External/SFML/lib/cmake/SFML")
+
+# Find the SFML packages
+find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
+
+# Add your source files (replace with your actual source files)
+add_executable(SuperMario main.cpp)  # Add all your source files here
+
+# Link SFML to your project
+target_link_libraries(SuperMario sfml-graphics sfml-window sfml-system)
