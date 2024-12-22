@@ -8,8 +8,8 @@ class Mario: public ContactListener
 {
 private:
 	b2Body* body{};
-	bool isGrounded= false;
-
+	size_t isGrounded = 0;
+	bool isFacingLeft = false;
 public:
 	void Begin();
 	void Update(float deltaTime);

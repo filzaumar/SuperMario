@@ -91,7 +91,7 @@ void Physics::Init()
 
 void Physics::Update(float deltaTime)
 {
-	world.Step(deltaTime, 6, 2); // frame limit 60 so deltaTime is gonna be 1/60
+	world.Step(deltaTime, 8, 4); // frame limit 60 so deltaTime is gonna be 1/60, more iterations so less sticking on wall 
 	world.SetContactListener(new MyGlobalContactListener());
 }
 
