@@ -52,4 +52,6 @@ void Render(Renderer& renderer)
 {
     map.Draw(renderer);
     mario.Draw(renderer);
+    
+    Physics::DebugDraw(renderer);
 }

@@ -1,16 +1,23 @@
 #pragma once
 #include<SFML/Graphics.hpp>
-#include"Renderer.h"
 #include<box2d/b2_body.h>
-class Mario
+#include"Renderer.h"
+#include"Physics.h"
+
+class Mario: public ContactListener
 {
 private:
-	b2Body* body;
+	b2Body* body{};
+	bool isGrounded= false;
+
 public:
 	void Begin();
 	void Update(float deltaTime);
 	void Draw(Renderer&);
 	sf::Vector2f position{};
 	float angle{};
+
+	void OnBeginContact()override;
+	void OnEndContact()override;
 };
 
