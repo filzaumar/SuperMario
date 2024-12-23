@@ -42,6 +42,12 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Coins.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -74,6 +80,12 @@
     <ClInclude Include="Animation.h">
       <Filter>Header.h</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Coins.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\brick.png">
@@ -95,6 +107,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="resources\textures\jump.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\coin.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\c1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\c2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\c3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\c4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\c5.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -137,9 +137,11 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Coins.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Resources.cpp" />
@@ -147,10 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Coins.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
@@ -160,6 +164,12 @@
   <ItemGroup>
     <Image Include="Assets\brick.png" />
     <Image Include="resources\Image\map.png" />
+    <Image Include="resources\textures\c1.png" />
+    <Image Include="resources\textures\c2.png" />
+    <Image Include="resources\textures\c3.png" />
+    <Image Include="resources\textures\c4.png" />
+    <Image Include="resources\textures\c5.png" />
+    <Image Include="resources\textures\coin.jpg" />
     <Image Include="resources\textures\jump.png" />
     <Image Include="resources\textures\mario.png" />
     <Image Include="resources\textures\run1.png" />

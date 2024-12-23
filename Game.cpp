@@ -3,6 +3,7 @@
 Map map(1.0f); //map with cell size 
 Camera camera(15.625f); // Create the camera with a zoom level
 Mario mario;
+std::vector<Object*>objects{};
 
 void Begin()
 {
@@ -32,11 +33,15 @@ void Begin()
     
     
 
-    mario.position = map.InitFromImage(image);
+    mario.position = map.InitFromImage(image, objects);
     {
         std::cout << "maarioooo" << mario.position.x << mario.position.y << std::endl;
     }
     mario.Begin();
+    for (auto& object : objects)
+    {
+        object->Begin();
+    }
 
 
 }
@@ -45,6 +50,11 @@ void Update(float deltaTime)
 {
     Physics::Update(deltaTime);
     mario.Update(deltaTime);
+    for (auto& object : objects)
+    {
+        object->Update(deltaTime);
+    }
+
     camera.position = mario.position;   
 }
 
@@ -52,6 +62,11 @@ void Render(Renderer& renderer)
 {
     map.Draw(renderer);
     mario.Draw(renderer);
+
+    for (auto& object : objects)
+    {
+        object->Render(renderer);
+    }
     
     Physics::DebugDraw(renderer);
 }

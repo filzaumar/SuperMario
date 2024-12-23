@@ -26,8 +26,8 @@ void Mario::Begin()
     runAnimation = Animation(
         { AnimFrame(0.1f, Resources::textures["run3.png"]),
           AnimFrame(0.1f, Resources::textures["run2.png"]),
-          AnimFrame(0.1f,Resources::textures["run1.png"])
-        }, 0.3f); 
+          AnimFrame(0.1f, Resources::textures["run1.png"])
+        } , 0.3f); 
 
 
     //Dynamic body physics
