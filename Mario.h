@@ -3,6 +3,7 @@
 #include<box2d/b2_body.h>
 #include"Renderer.h"
 #include"Physics.h"
+#include "Animation.h"
 
 class Mario: public ContactListener
 {
@@ -10,6 +11,8 @@ private:
 	b2Body* body{};
 	size_t isGrounded = 0;
 	bool isFacingLeft = false;
+	Animation runAnimation;
+	sf::Texture textureToDraw{};
 public:
 	void Begin();
 	void Update(float deltaTime);

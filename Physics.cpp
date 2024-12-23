@@ -18,7 +18,7 @@ public:
 		}
 		shape.setFillColor(sf::Color::Transparent);
 		shape.setOutlineThickness(0.02f);
-		shape.setOutlineColor(sf::Color(color.r * 255, color.g * 255, color.b * 255, color.a * 255));
+		shape.setOutlineColor(sf::Color(color.r * 255, color.g * 255, color.b * 255, color.a * 180));
 		target.draw(shape);
 	}
 	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) override
@@ -30,7 +30,7 @@ public:
 		}
 		shape.setFillColor(sf::Color::Transparent);
 		shape.setOutlineThickness(0.02f);
-		shape.setOutlineColor(sf::Color(color.r * 255, color.g * 255, color.b * 255, color.a * 120));
+		shape.setOutlineColor(sf::Color(color.r * 255, color.g * 255, color.b * 255, color.a * 180));
 		target.draw(shape);
 	}
 	void DrawCircle(const b2Vec2& center, float radius, const b2Color& color) override
@@ -100,7 +100,7 @@ void Physics::DebugDraw(Renderer& renderer)
 	if (!debugDraw) //if debugdraw is null
 	{
 		debugDraw = new MyDebugDraw(renderer.target);
-		debugDraw->SetFlags(b2Draw::e_shapeBit);
+		debugDraw->SetFlags(b2Draw::e_centerOfMassBit);
 		world.SetDebugDraw(debugDraw);
 	}
 	world.DebugDraw();

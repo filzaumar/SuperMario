@@ -7,7 +7,7 @@ Renderer::Renderer(sf::RenderTarget& target) : target(target) {}
 // Draw Method
 void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, const sf::Vector2f& size, float angle)
 {
-    sprite.setTexture(texture);
+    sprite.setTexture(texture, true);
 
     // Set origin
     sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.0f);

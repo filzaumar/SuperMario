@@ -1,11 +1,8 @@
 #include "Game.h"
-
+#include "Animation.h"
 Map map(1.0f); //map with cell size 
 Camera camera(15.625f); // Create the camera with a zoom level
 Mario mario;
-
-
-
 
 void Begin()
 {
@@ -32,6 +29,9 @@ void Begin()
 
     sf::Image image;
     image.loadFromFile("resources/image/map.png");
+    
+    
+
     mario.position = map.InitFromImage(image);
     {
         std::cout << "maarioooo" << mario.position.x << mario.position.y << std::endl;

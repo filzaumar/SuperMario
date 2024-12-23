@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="SuperMario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Map.h" />
@@ -158,7 +160,11 @@
   <ItemGroup>
     <Image Include="Assets\brick.png" />
     <Image Include="resources\Image\map.png" />
+    <Image Include="resources\textures\jump.png" />
     <Image Include="resources\textures\mario.png" />
+    <Image Include="resources\textures\run1.png" />
+    <Image Include="resources\textures\run2.png" />
+    <Image Include="resources\textures\run3.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SuperMario.rc" />

@@ -39,6 +39,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -68,6 +71,9 @@
     <ClInclude Include="Physics.h">
       <Filter>Header.h</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\brick.png">
@@ -77,6 +83,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="resources\textures\mario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\run2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\run3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\run1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\textures\jump.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

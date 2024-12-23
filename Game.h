@@ -7,6 +7,8 @@
 #include "Resources.h"
 #include "Map.h"
 #include "Mario.h"
+#include "Animation.h"
+
 #include "Physics.h"
 #include<filesystem>
 #include<iostream>

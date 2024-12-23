@@ -1,12 +1,19 @@
 #include "Mario.h"
 #include "Resources.h"
 #include"Physics.h"
+#include "Map.h"
+#include"Animation.h"
+#include"Renderer.h"
+#include "Camera.h"
+#include"Game.h"
+
 #include <box2d/b2_body.h>
 #include<box2d/b2_polygon_shape.h>
 #include<box2d/b2_circle_shape.h>
 #include<box2d/b2_fixture.h>
-#include<iostream>
 #include <box2d/b2_math.h> 
+
+#include<iostream>
 
 #define M_PI 3.142f
 
@@ -15,6 +22,14 @@ const float jumpVelocity = 8.0f; //jump velocity
 
 void Mario::Begin()
 {
+    //Running animation for mario
+    runAnimation = Animation(
+        { AnimFrame(0.1f, Resources::textures["run3.png"]),
+          AnimFrame(0.1f, Resources::textures["run2.png"]),
+          AnimFrame(0.1f,Resources::textures["run1.png"])
+        }, 0.3f); 
+
+
     //Dynamic body physics
     b2BodyDef bodyDef{};
     bodyDef.type = b2_dynamicBody;
@@ -23,7 +38,7 @@ void Mario::Begin()
     body = Physics::world.CreateBody(&bodyDef);
 
     b2PolygonShape shape{};
-    shape.SetAsBox(0.45f, 0.28125f);
+    shape.SetAsBox(0.4f, 0.43125f);
     b2FixtureDef fixtureDef{};
     fixtureDef.shape = &shape;
     fixtureDef.friction = 0.0f;
@@ -36,7 +51,7 @@ void Mario::Begin()
     fixtureDef.shape = &circleShape;
     body->CreateFixture(&fixtureDef); 
 
-    circleShape.m_p.Set(0.0f, 0.5f); //neeche wala fixture
+    circleShape.m_p.Set(0.0f, 0.35f); //neeche wala fixture
     body->CreateFixture(&fixtureDef);
 
     shape.SetAsBox(0.4f, 0.2f, b2Vec2(0.0f, 1.0f), 0.0f);
@@ -49,7 +64,8 @@ void Mario::Begin()
 void Mario::Update(float deltaTime)
 {
     float move = movementSpeed;
-
+    runAnimation.Update(deltaTime);
+   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         move *= 2;
 
@@ -67,10 +83,15 @@ void Mario::Update(float deltaTime)
 
     body->SetLinearVelocity(velocity);
    
-    if (velocity.x < -0.0f)
+    textureToDraw = runAnimation.GetTexture();
+    if (velocity.x < 0.0f)
         isFacingLeft = true;
     else if (velocity.x > 0.0f)
         isFacingLeft = false;
+    else
+        textureToDraw = Resources::textures["mario.png"];
+    if (!isGrounded)
+        textureToDraw = Resources::textures["jump.png"];
 
 
     position = sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
@@ -80,7 +101,11 @@ void Mario::Update(float deltaTime)
 
 void Mario::Draw(Renderer& renderer)
 {
-    renderer.Draw(Resources::textures["mario.png"], position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+    renderer.Draw(textureToDraw
+        //Resources::textures["mario.png"]
+        , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+    std::cout << "Texture size: " << runAnimation.GetTexture().getSize().x << " " << runAnimation.GetTexture().getSize().y << std::endl;
+   // std::cout << "Sprite position: " << .getPosition().x << " " << sprite.getPosition().y << std::endl;
 }
 
 void Mario::OnBeginContact()
