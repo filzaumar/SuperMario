@@ -19,16 +19,13 @@
 
 const float movementSpeed = 5.0f; //for camera basically to see tile map
 const float jumpVelocity = 8.0f; //jump velocity
-int coinCount = 0;
+
 
 bool Mario::isCollidingWithCoin(Coins& coin)
 {
    float distance = std::sqrt(std::pow(position.x - coin.body->GetPosition().x, 2) +
       std::pow(position.y - coin.body->GetPosition().y, 2));
-   //if (distance < 0.5f)
-   //{
-     //  std::cout << "Collisionnnnnnnnnn" << std::endl;
-   //}
+  
       return distance < 0.5f;  // CHECKK !! (radius of Mario + coin)
 }
 
@@ -71,6 +68,21 @@ void Mario::Begin()
     fixtureDef.isSensor=true;
     body->CreateFixture(&fixtureDef);
     
+
+    // Load font
+    std::string fontPath = "resources/fonts/Arialn.ttf";
+    std::cout << "Loading font from: " << fontPath << std::endl;
+    if (!font.loadFromFile(fontPath)) {
+        std::cerr << "Failed to load font from " << fontPath << std::endl;
+    }
+    else {
+        std::cout << "Font loaded successfully!" << std::endl;
+    }
+    // Set up the text object for displaying the coin count
+    coinText.setFont(font);
+    coinText.setCharacterSize(50); // Font size
+    coinText.setFillColor(sf::Color::Yellow); // Text color
+    coinText.setPosition(10.0f, 10.f); // Position on screen (top-left corner)
 }
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
@@ -110,7 +122,6 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
     angle = body->GetAngle() * 180.f / M_PI;
 
 
-
     //Coin collection
 
         for (auto& obj : objects) {
@@ -138,7 +149,8 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                     return false;
                 }),
             objects.end());
-
+      
+        coinText.setString("Coins: " + std::to_string(coinCount));
 }
 
 
@@ -147,6 +159,9 @@ void Mario::Draw(Renderer& renderer)
     renderer.Draw(textureToDraw
         //Resources::textures["mario.png"]
         , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+
+    // Draw the coin counter text
+    renderer.DrawText(coinText);
 }
 
 void Mario::OnBeginContact()

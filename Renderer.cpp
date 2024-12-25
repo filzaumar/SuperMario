@@ -21,3 +21,8 @@ void Renderer::Draw(const sf::Texture& texture, const sf::Vector2f& position, co
     target.draw(sprite);
 }
 
+void Renderer::DrawText(const sf::Text& text)
+{
+    target.draw(text);
+}
+

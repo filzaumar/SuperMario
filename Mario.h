@@ -21,6 +21,9 @@ public:
 	void Draw(Renderer&);
 	sf::Vector2f position{};
 	float angle{};
+	sf::Text coinText;
+	sf::Font font;
+	int coinCount = 0;
 
 	void OnBeginContact()override;
 	void OnEndContact()override;
