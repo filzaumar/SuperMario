@@ -2,7 +2,7 @@
 void Animation::Update(float deltaTime)
 {
     time += deltaTime;
-    std::cout << "Animation time: " << time << "/" << length << std::endl;
+    //std::cout << "Animation time: " << time << "/" << length << std::endl;
 }
 
 sf::Texture Animation::GetTexture()

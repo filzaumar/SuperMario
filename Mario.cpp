@@ -6,7 +6,8 @@
 #include"Renderer.h"
 #include "Camera.h"
 #include"Game.h"
-
+#include "Object.h"
+#include "Coins.h"
 #include <box2d/b2_body.h>
 #include<box2d/b2_polygon_shape.h>
 #include<box2d/b2_circle_shape.h>
@@ -19,6 +20,18 @@
 
 const float movementSpeed = 5.0f; //for camera basically to see tile map
 const float jumpVelocity = 8.0f; //jump velocity
+
+
+bool Mario::isCollidingWithCoin(Coins& coin)
+{
+   float distance = std::sqrt(std::pow(position.x - coin.body->GetPosition().x, 2) +
+      std::pow(position.y - coin.body->GetPosition().y, 2));
+   //if (distance < 0.5f)
+   //{
+     //  std::cout << "Collisionnnnnnnnnn" << std::endl;
+   //}
+      return distance < 0.5f;  // CHECKK !! (radius of Mario + coin)
+}
 
 void Mario::Begin()
 {
@@ -61,7 +74,7 @@ void Mario::Begin()
     
 }
 
-void Mario::Update(float deltaTime)
+void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 {
     float move = movementSpeed;
     runAnimation.Update(deltaTime);
@@ -97,15 +110,27 @@ void Mario::Update(float deltaTime)
     position = sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
     angle = body->GetAngle() * 180.f / M_PI;
 
+
+
+    //Coin collection
+
+        for (auto& obj : objects) {
+       // Check if the object is a coin
+        Coins* coin = dynamic_cast<Coins*>(obj);
+           if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
+               coin->Collect();  
+               std::cout << "COLLISIONNNNN" << std::endl;
+               
+         }
+       }
 }
+
 
 void Mario::Draw(Renderer& renderer)
 {
     renderer.Draw(textureToDraw
         //Resources::textures["mario.png"]
         , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
-    std::cout << "Texture size: " << runAnimation.GetTexture().getSize().x << " " << runAnimation.GetTexture().getSize().y << std::endl;
-   // std::cout << "Sprite position: " << .getPosition().x << " " << sprite.getPosition().y << std::endl;
 }
 
 void Mario::OnBeginContact()

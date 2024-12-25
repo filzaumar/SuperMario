@@ -4,7 +4,8 @@
 #include"Renderer.h"
 #include"Physics.h"
 #include "Animation.h"
-
+#include"Map.h"
+#include"Coins.h"
 class Mario: public ContactListener
 {
 private:
@@ -13,9 +14,10 @@ private:
 	bool isFacingLeft = false;
 	Animation runAnimation;
 	sf::Texture textureToDraw{};
+	bool isCollidingWithCoin(Coins& coin);
 public:
 	void Begin();
-	void Update(float deltaTime);
+	void Update(float deltaTime, std::vector<Object*>& objects);
 	void Draw(Renderer&);
 	sf::Vector2f position{};
 	float angle{};

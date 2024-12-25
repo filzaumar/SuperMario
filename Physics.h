@@ -30,3 +30,7 @@ public:
 	static MyDebugDraw* debugDraw;
 };
 
+
+
+//Collision trial
+

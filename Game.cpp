@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Animation.h"
+
 Map map(1.0f); //map with cell size 
 Camera camera(15.625f); // Create the camera with a zoom level
 Mario mario;
@@ -49,7 +50,7 @@ void Begin()
 void Update(float deltaTime)
 {
     Physics::Update(deltaTime);
-    mario.Update(deltaTime);
+    mario.Update(deltaTime, objects);
     for (auto& object : objects)
     {
         object->Update(deltaTime);
