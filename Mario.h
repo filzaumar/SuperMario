@@ -1,4 +1,5 @@
 #pragma once
+#include"Object.h"
 #include<SFML/Graphics.hpp>
 #include<box2d/b2_body.h>
 #include"Renderer.h"
@@ -6,7 +7,7 @@
 #include "Animation.h"
 #include"Map.h"
 #include"Coins.h"
-class Mario: public ContactListener
+class Mario: public ContactListener, public Object
 {
 private:
 	b2Body* body{};
@@ -15,6 +16,8 @@ private:
 	Animation runAnimation;
 	sf::Texture textureToDraw{};
 	bool isCollidingWithCoin(Coins& coin);
+
+
 public:
 	void Begin();
 	void Update(float deltaTime, std::vector<Object*>& objects);

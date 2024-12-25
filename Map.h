@@ -4,6 +4,7 @@
 #include"Renderer.h"
 #include"Resources.h"
 #include"Object.h"
+#include"Enemy.h"
 #include<SFML/Graphics.hpp>
 class Map
 {

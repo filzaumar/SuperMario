@@ -48,6 +48,9 @@
     <ClCompile Include="Coins.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -84,6 +87,9 @@
       <Filter>Header.h</Filter>
     </ClInclude>
     <ClInclude Include="Coins.h">
+      <Filter>Header.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Header.h</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,6 +133,9 @@
     <Image Include="resources\textures\c5.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\textures\enemy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SuperMario.rc">
@@ -135,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\font\Arialn.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\font\PixelifySans-Black.ttf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>

@@ -138,6 +138,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Coins.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Coins.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Map.h" />
@@ -170,6 +172,7 @@
     <Image Include="resources\textures\c4.png" />
     <Image Include="resources\textures\c5.png" />
     <Image Include="resources\textures\coin.jpg" />
+    <Image Include="resources\textures\enemy.png" />
     <Image Include="resources\textures\jump.png" />
     <Image Include="resources\textures\mario.png" />
     <Image Include="resources\textures\run1.png" />
@@ -181,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\font\Arialn.ttf" />
+    <Font Include="resources\font\PixelifySans-Black.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

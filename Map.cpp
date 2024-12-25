@@ -1,4 +1,5 @@
 #include "Map.h"
+#include <SFML/System/Vector2.hpp>
 #include"Physics.h"
 #include"Coins.h"
 #include<SFML/Graphics.hpp>
@@ -145,6 +146,12 @@ sf::Vector2f Map::InitFromImage(const sf::Image& image, std::vector<Object*>& ob
 				coin->position = sf::Vector2f(cellSize * x + cellSize / 2.0f, cellSize * y + cellSize / 2.0f);
 				objects.push_back(coin);
 				std::cout << "Coin created at position (" << coin->position.x << ", " << coin->position.y << ")" << std::endl;  // Debug message
+			}
+			else if (isColorCloseTo(color, sf::Color(0,0, 250))) {
+				Object* enemy = new Enemy();
+				enemy->position = sf::Vector2f(cellSize * x + cellSize / 2.0f, cellSize * y + cellSize / 2.0f);
+				objects.push_back(enemy);
+				std::cout << "Coin created at position (" << enemy->position.x << ", " << enemy->position.y << ")" << std::endl;  // Debug message
 			}
 			else if (isColorCloseTo(color, sf::Color(250, 0, 0))) {
 				// Handle color close to Red (250, 0, 0)

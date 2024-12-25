@@ -30,7 +30,7 @@ bool Mario::isCollidingWithCoin(Coins& coin)
 }
 
 void Mario::Begin()
-{
+ {
     //Running animation for mario
     runAnimation = Animation(
         { AnimFrame(0.1f, Resources::textures["run3.png"]),
@@ -70,19 +70,19 @@ void Mario::Begin()
     
 
     // Load font
-    std::string fontPath = "resources/fonts/Arialn.ttf";
-    std::cout << "Loading font from: " << fontPath << std::endl;
-    if (!font.loadFromFile(fontPath)) {
-        std::cerr << "Failed to load font from " << fontPath << std::endl;
+     
+    if (!font.loadFromFile("resources/font/Arialn.ttf"))
+    {
+        std::cerr << "Failed to load font" << std::endl;
     }
     else {
         std::cout << "Font loaded successfully!" << std::endl;
     }
     // Set up the text object for displaying the coin count
     coinText.setFont(font);
-    coinText.setCharacterSize(50); // Font size
-    coinText.setFillColor(sf::Color::Yellow); // Text color
-    coinText.setPosition(10.0f, 10.f); // Position on screen (top-left corner)
+    coinText.setCharacterSize(5.f); // Font size
+    coinText.setFillColor(sf::Color::Cyan); // Text color
+    coinText.setPosition(3.5f, 14.5f); // Position on screen (top-left corner)
 }
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
