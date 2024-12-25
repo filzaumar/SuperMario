@@ -13,14 +13,13 @@
 #include<box2d/b2_circle_shape.h>
 #include<box2d/b2_fixture.h>
 #include <box2d/b2_math.h> 
-
 #include<iostream>
 
 #define M_PI 3.142f
 
 const float movementSpeed = 5.0f; //for camera basically to see tile map
 const float jumpVelocity = 8.0f; //jump velocity
-
+int coinCount = 0;
 
 bool Mario::isCollidingWithCoin(Coins& coin)
 {
@@ -119,10 +118,27 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
         Coins* coin = dynamic_cast<Coins*>(obj);
            if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
                coin->Collect();  
-               std::cout << "COLLISIONNNNN" << std::endl;
-               
+               coinCount++;      // Increase coin counter
+               std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
          }
        }
+    
+        // Remove collected coins
+        objects.erase(
+            std::remove_if(
+                objects.begin(),
+                objects.end(),
+                [](Object* obj) {
+                    Coins* coin = dynamic_cast<Coins*>(obj);
+                    if (coin && coin->collected) {
+                     
+                        delete coin; // Free memory
+                        return true; // Remove from objects
+                    }
+                    return false;
+                }),
+            objects.end());
+
 }
 
 

@@ -4,6 +4,7 @@
 Map map(1.0f); //map with cell size 
 Camera camera(15.625f); // Create the camera with a zoom level
 Mario mario;
+int score = 0;
 std::vector<Object*>objects{};
 
 void Begin()
