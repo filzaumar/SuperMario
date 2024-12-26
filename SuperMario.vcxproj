@@ -172,6 +172,7 @@
     <Image Include="resources\textures\c4.png" />
     <Image Include="resources\textures\c5.png" />
     <Image Include="resources\textures\coin.jpg" />
+    <Image Include="resources\textures\dead.png" />
     <Image Include="resources\textures\enemy.png" />
     <Image Include="resources\textures\jump.png" />
     <Image Include="resources\textures\mario.png" />

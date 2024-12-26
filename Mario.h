@@ -16,6 +16,7 @@ private:
 	Animation runAnimation;
 	sf::Texture textureToDraw{};
 	bool isCollidingWithCoin(Coins& coin);
+	bool isCollidingWithEnemy(Enemy& enemy);
 
 
 public:
@@ -27,6 +28,8 @@ public:
 	sf::Text coinText;
 	sf::Font font;
 	int coinCount = 0;
+	bool isDead = false;
+	void Die();
 
 	void OnBeginContact()override;
 	void OnEndContact()override;

@@ -1,4 +1,6 @@
+#pragma once
 #include "Mario.h"
+#include"Enemy.h"
 #include "Resources.h"
 #include"Physics.h"
 #include "Map.h"
@@ -29,6 +31,13 @@ bool Mario::isCollidingWithCoin(Coins& coin)
       return distance < 0.5f;  // CHECKK !! (radius of Mario + coin)
 }
 
+bool Mario::isCollidingWithEnemy(Enemy& enemy)
+{
+    float distance = std::sqrt(std::pow(position.x - enemy.body->GetPosition().x, 2) +
+        std::pow(position.y - enemy.body->GetPosition().y, 2));
+
+    return distance < 1.057f;  // CHECKK !! (radius of Mario + coin)
+}
 void Mario::Begin()
  {
     //Running animation for mario
@@ -87,6 +96,10 @@ void Mario::Begin()
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 {
+    if (isDead) {
+        body->SetLinearVelocity(b2Vec2(0, 0));  // Stop movement
+        return;
+    }
     float move = movementSpeed;
     runAnimation.Update(deltaTime);
    
@@ -133,6 +146,31 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
          }
        }
+       
+        
+    // Enemy collision check
+        for (auto& obj : objects) {
+            Enemy* enemy = dynamic_cast<Enemy*>(obj);
+            if (enemy && !enemy->isDead && isCollidingWithEnemy(*enemy)) {
+                // Get positions to check if Mario is above enemy
+                float marioBottom = position.y + 0.43125f;  // Using your box dimensions
+                float enemyTop = enemy->body->GetPosition().y - 0.5f;  // Using enemy box height
+
+                // If Mario is above the enemy
+                if (marioBottom < enemyTop) {
+                   // enemy->Die();  // Kill enemy
+                    // Add jump boost
+                    b2Vec2 vel = body->GetLinearVelocity();
+                    vel.y = -jumpVelocity / 2;  // Small bounce
+                    body->SetLinearVelocity(vel);
+                }
+                else {
+                    Die();  // Kill Mario
+                }
+                std::cout << "Collision with enemy!" << std::endl;
+            }
+        }
+
     
         // Remove collected coins
         objects.erase(
@@ -163,6 +201,18 @@ void Mario::Draw(Renderer& renderer)
     // Draw the coin counter text
     renderer.DrawText(coinText);
 }
+// Add the Die function
+void Mario::Die()
+{
+    if (!isDead) {
+        isDead = true;
+        std::cout << "Mario died!" << std::endl;
+        // Optional: Play death animation
+        textureToDraw = Resources::textures["dead.png"];  // Or use a death texture if you have one
+        body->SetLinearVelocity(b2Vec2(0, +5));  // Small jump on death
+    }
+}
+
 
 void Mario::OnBeginContact()
 {

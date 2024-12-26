@@ -8,6 +8,7 @@ public:
     Enemy() {};
     Enemy(const sf::Vector2f& position);
     b2Body* body;  // Add a body for physics
+    b2Fixture* topSensorFixture;
     bool collected = false;  // A flag to mark if the coin has been collected
     void Collect() { collected = true; std::cout << "COIN COLLECTED" << std::endl; }
     int direction = 1;
@@ -17,6 +18,8 @@ public:
     void Begin() override;
     void Update(float deltaTime) override;
     void Render(Renderer& renderer) override;
+   // void Die();
+    void OnCollision(void* other);
 
 private:
     Animation animation;

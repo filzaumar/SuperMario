@@ -26,8 +26,18 @@ void Enemy::Begin()
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = 0.0f;
     body->CreateFixture(&fixtureDef);
+
+
+    // Add a sensor on top of the enemy to detect player hits
+    //b2PolygonShape topSensor;
+    //topSensor.SetAsBox(0.4f, 0.1f, b2Vec2(0.0f, -0.5f), 0);  // Thin box on top
+
+    //b2FixtureDef sensorDef;
+    //sensorDef.shape = &topSensor;
+    //sensorDef.isSensor = true;  // Make it a sensor so it only detects contact
+    //topSensorFixture = body->CreateFixture(&sensorDef);
 }
 
 void Enemy::Update(float deltaTime)
@@ -41,9 +51,7 @@ void Enemy::Update(float deltaTime)
     velocity.x = direction * moveSpeed;  // Move left or right
     body->SetLinearVelocity(velocity);
 
-    // Update position for rendering
-   // position = sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
-
+  
 
 
 
@@ -84,5 +92,20 @@ void Enemy::Update(float deltaTime)
 
 void Enemy::Render(Renderer& renderer)
 {
+    if (isDead) return;
     renderer.Draw(animation.GetTexture(), position, sf::Vector2f(1.f, 1.f));
+}
+
+
+void Enemy::OnCollision(void* other)
+{
+    std::cout << "Collision Detected!" << std::endl;
+    // Check if collision is with the top sensor
+    for (b2ContactEdge* edge = body->GetContactList(); edge; edge = edge->next) {
+        if (edge->contact->GetFixtureA() == topSensorFixture ||
+            edge->contact->GetFixtureB() == topSensorFixture) {
+         //   Die();
+            return;
+        }
+    }
 }
