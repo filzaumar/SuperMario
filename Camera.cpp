@@ -19,3 +19,9 @@ sf::View Camera::GetView(sf::Vector2u windowSize)
 
 	return sf::View(position, size);
 }
+
+sf::View Camera::GetUIView()
+{
+	float aspect = View.x / .y;
+	return sf::View();
+}

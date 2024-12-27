@@ -152,5 +152,8 @@
     <Font Include="resources\font\PixelifySans-Black.ttf">
       <Filter>Resource Files</Filter>
     </Font>
+    <Font Include="resources\font\PixelOperator.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -186,6 +186,7 @@
   <ItemGroup>
     <Font Include="resources\font\Arialn.ttf" />
     <Font Include="resources\font\PixelifySans-Black.ttf" />
+    <Font Include="resources\font\PixelOperator.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

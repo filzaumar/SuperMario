@@ -26,10 +26,12 @@ public:
 	sf::Vector2f position{};
 	float angle{};
 	sf::Text coinText;
+	sf::Text gameOverText;
 	sf::Font font;
 	int coinCount = 0;
 	bool isDead = false;
 	void Die();
+	float baseFontSize = 40; // Base size for a standard zoom level
 
 	void OnBeginContact()override;
 	void OnEndContact()override;

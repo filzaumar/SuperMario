@@ -78,20 +78,18 @@ void Mario::Begin()
     body->CreateFixture(&fixtureDef);
     
 
-    // Load font
-     
-    if (!font.loadFromFile("resources/font/Arialn.ttf"))
+    // Initialize text properties
+    if (!font.loadFromFile("resources/font/PixelOperator.ttf"))
     {
         std::cerr << "Failed to load font" << std::endl;
+        return;
     }
-    else {
-        std::cout << "Font loaded successfully!" << std::endl;
-    }
-    // Set up the text object for displaying the coin count
     coinText.setFont(font);
-    coinText.setCharacterSize(5.f); // Font size
-    coinText.setFillColor(sf::Color::Cyan); // Text color
-    coinText.setPosition(3.5f, 14.5f); // Position on screen (top-left corner)
+    coinText.setFillColor(sf::Color::White);
+    coinText.setCharacterSize(20); // Fixed size
+    coinText.setStyle(sf::Text::Regular);
+
+
 }
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
@@ -187,19 +185,32 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                     return false;
                 }),
             objects.end());
-      
+
+
+
+
+   
+
         coinText.setString("Coins: " + std::to_string(coinCount));
+        sf::Vector2f viewPos = camera.position;
+        coinText.setString("Coins: " + std::to_string(coinCount));
+        coinText.setPosition(viewPos.x-15.f, viewPos.y-10.f);
+       
 }
 
 
 void Mario::Draw(Renderer& renderer)
 {
-    renderer.Draw(textureToDraw
-        //Resources::textures["mario.png"]
-        , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+    
 
-    // Draw the coin counter text
+
     renderer.DrawText(coinText);
+    renderer.Draw(textureToDraw
+        , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+    if (isDead) 
+    {
+        renderer.DrawText(gameOverText);
+    }
 }
 // Add the Die function
 void Mario::Die()
@@ -209,7 +220,22 @@ void Mario::Die()
         std::cout << "Mario died!" << std::endl;
         // Optional: Play death animation
         textureToDraw = Resources::textures["dead.png"];  // Or use a death texture if you have one
-        body->SetLinearVelocity(b2Vec2(0, +5));  // Small jump on death
+
+      
+      /*gameOverText.setFont(font);
+        gameOverText.setString("GAME\nOVER!");
+        gameOverText.setCharacterSize(9); // Fixed larger size
+        gameOverText.setFillColor(sf::Color::Red);
+
+        sf::Vector2f viewPos = camera.position;
+        float viewWidth = camera.zoomLevel;
+        float viewHeight = camera.zoomLevel;
+
+        // Center the game over text
+        gameOverText.setPosition(
+            viewPos.x - (viewWidth / 2) + 0.5f,
+            viewPos.y - 11.0f
+        );*/ 
     }
 }
 
