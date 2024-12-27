@@ -7,7 +7,7 @@ void Animation::Update(float deltaTime)
 
 sf::Texture Animation::GetTexture()
 {
-        // Reset time if it's over the length of the animation
+        // Reset time if its over the length of the animation
         while (time > length) {
             time -= length;
         }
@@ -35,24 +35,9 @@ sf::Texture Animation::GetTexture()
         // If time is equal to or exceeds the length of the animation, return the last frame
         return frames.back().texture;
 
-        // Error Handling
+    
         throw std::runtime_error("No valid texture found for animation frame.");
     
-
-   /* if (frames.empty()) {
-            std::cerr << "Error: Animation has no frames." << std::endl;
-            return sf::Texture();
-        }
-        for (const auto& frame : frames) {
-            if (time >= frame.time) {
-                std::cout << "Returning texture with size: "
-                    << frame.texture.getSize().x << " "
-                    << frame.texture.getSize().y << std::endl;
-                return frame.texture;
-            }
-        }
-        return frames.front().texture;
-    */
     }
 
     

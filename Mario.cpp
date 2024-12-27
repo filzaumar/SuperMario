@@ -204,7 +204,7 @@ void Mario::Draw(Renderer& renderer)
     
 
 
-    renderer.DrawText(coinText);
+    //renderer.DrawText(coinText);
     renderer.Draw(textureToDraw
         , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
     if (isDead) 
@@ -219,7 +219,7 @@ void Mario::Die()
         isDead = true;
         std::cout << "Mario died!" << std::endl;
         // Optional: Play death animation
-        textureToDraw = Resources::textures["dead.png"];  // Or use a death texture if you have one
+        textureToDraw = Resources::textures["dead.png"]; 
 
       
       /*gameOverText.setFont(font);

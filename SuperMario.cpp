@@ -39,7 +39,7 @@ int main()
         window.setView(camera.GetView(window.getSize()));
 
         // Clear the window
-        window.clear(sf::Color::Black);
+        window.clear();
 
         // Render the scene
         Render(renderer);

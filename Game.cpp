@@ -26,6 +26,7 @@ void Begin()
     }
 
  
+  //  Resources::textures[];
 
     //Phisics Init() after loading resources
     Physics::Init();
@@ -62,6 +63,7 @@ void Update(float deltaTime)
 
 void Render(Renderer& renderer)
 {
+    renderer.Draw(Resources::textures["sky.jpg"], camera.position, camera.GetViewSize());
     map.Draw(renderer);
     mario.Draw(renderer);
 

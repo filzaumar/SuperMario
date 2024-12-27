@@ -179,6 +179,7 @@
     <Image Include="resources\textures\run1.png" />
     <Image Include="resources\textures\run2.png" />
     <Image Include="resources\textures\run3.png" />
+    <Image Include="resources\textures\sky.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SuperMario.rc" />
