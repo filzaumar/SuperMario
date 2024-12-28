@@ -12,11 +12,10 @@ sf::Texture Animation::GetTexture()
             time -= length;
         }
 
-        // If there are no frames, throw an error
+        // Throw an error if there are no frames
         if (frames.empty()) {
             throw std::runtime_error("No frames in animation");
         }
-
 
         float currentCumulativeTime = 0;
         for (size_t i = 0; i < frames.size(); ++i) {
@@ -27,10 +26,9 @@ sf::Texture Animation::GetTexture()
             }
         }
 
-        // If time is equal to or exceeds the length of the animation, return the last frame
+        // If time >= length of animation, return the last frame
         return frames.back().texture;
 
-    
         throw std::runtime_error("No valid texture found for animation frame.");
     
     }

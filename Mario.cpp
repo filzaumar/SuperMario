@@ -1,14 +1,13 @@
 #pragma once
 #include "Mario.h"
 
-
 #define M_PI 3.142f
 
-const float movementSpeed = 5.0f; //for camera basically to see tile map
+const float movementSpeed = 5.0f; //camera to basically see tilemap
 const float jumpVelocity = 8.0f; //jump velocity
 
 
-bool Mario::isCollidingWithCoin(Coins& coin)
+bool Mario::isCollidingWithCoin(Coins& coin) //Check for mario body colliding with coin
 {
    float distance = std::sqrt(std::pow(position.x - coin.body->GetPosition().x, 2) +
       std::pow(position.y - coin.body->GetPosition().y, 2));
@@ -16,7 +15,7 @@ bool Mario::isCollidingWithCoin(Coins& coin)
       return distance < 0.5f;  // (radius of Mario + coin)
 }
 
-bool Mario::isCollidingWithEnemy(Enemy& enemy)
+bool Mario::isCollidingWithEnemy(Enemy& enemy) //Check for mario body colliding with enemy
 {
     float distance = std::sqrt(std::pow(position.x - enemy.body->GetPosition().x, 2) +
         std::pow(position.y - enemy.body->GetPosition().y, 2));
@@ -67,7 +66,8 @@ void Mario::Begin()
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 {
-    if (isDead || getCoinCount()==2) {
+    // Check for game ending conditions
+    if (isDead || getCoinCount()==28) {
         body->SetLinearVelocity(b2Vec2(0, 0));  // Stop movement
         return;
     }
@@ -76,6 +76,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
     float move = movementSpeed;
     runAnimation.Update(deltaTime);
 
+    // Mario movement mechanics
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         move *= 2;
 
@@ -93,6 +94,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
     body->SetLinearVelocity(velocity);
 
+    // Mario facing position
     textureToDraw = runAnimation.GetTexture();
     if (velocity.x < 0.0f)
         isFacingLeft = true;
@@ -103,32 +105,28 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
     if (!isGrounded)
         textureToDraw = Resources::textures["jump.png"];
 
-
+    // Updating position
     position = sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
     angle = body->GetAngle() * 180.f / M_PI;
 
 
     //Coin collection
-
-    for (auto& obj : objects) {
+        for (auto& obj : objects) {
         // Check if the object is a coin
         Coins* coin = dynamic_cast<Coins*>(obj);
         if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
             coin->Collect();
-            coinCount++;      // Increase coin counter
-            //std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
+            coinCount++; // Increase coin counter
         }
     }
 
-
-    // Enemy collision check
+    // Enemy killing mario
     for (auto& obj : objects) {
         Enemy* enemy = dynamic_cast<Enemy*>(obj);
         if (enemy && isCollidingWithEnemy(*enemy)) {
-            Die();  // Mario dies on any contact with enemy
-            break;  // Exit the loop since Mario is dead
+            Die();     // Mario dies on contact
+            break;     // Mario is dead so exit loop
         }
-
 
         // Remove collected coins
         objects.erase(
@@ -145,39 +143,25 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                     return false;
                 }),
             objects.end());
-
-
     }
 }
 
-
-void Mario::Draw(Renderer& renderer)
-{
-    
-
-
-    //renderer.DrawText(coinText);
-    renderer.Draw(textureToDraw
-        , position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
-    if (isDead) 
-    {
-        renderer.DrawText(gameOverText);
-    }
+void Mario::Draw(Renderer& renderer) // Draw Mario
+{ 
+    renderer.Draw(textureToDraw, position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
 }
-int Mario::getCoinCount()
+
+int Mario::getCoinCount() //Returns the current coins collected
 {
     return coinCount;
 }
-// Add the Die function
-void Mario::Die()
+
+void Mario::Die() // Function for mario to die 
 {
     if (!isDead) {
         isDead = true;
         std::cout << "Mario died!" << std::endl;
-        // Optional: Play death animation
-        textureToDraw = Resources::textures["dead.png"]; 
-
-    
+        textureToDraw = Resources::textures["dead.png"];   
     }
 }
 

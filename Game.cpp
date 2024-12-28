@@ -127,7 +127,7 @@ void RenderUI(Renderer& renderer)
             << gameOverText.getPosition().y << std::endl;
         renderer.target.draw(gameOverText);
     }
-    else if (mario.getCoinCount() == 2) {
+    else if (mario.getCoinCount() == 28) {
         // Rendering win text
         winText.setCharacterSize(200.0f);
         sf::FloatRect textBounds = winText.getLocalBounds();

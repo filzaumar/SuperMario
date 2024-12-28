@@ -4,6 +4,7 @@
 
 Coins::Coins(const sf::Vector2f& position)
 {
+	this->position = position;
 }
 
 void Coins::Begin()
@@ -19,23 +20,16 @@ void Coins::Begin()
     bodyDef.position.Set(position.x, position.y);
     bodyDef.type = b2_staticBody;
     body = Physics::world.CreateBody(&bodyDef);
-
-    b2CircleShape shape{};
-    shape.m_radius = 0.3f;
-    b2FixtureDef fixtureDef{};
-    fixtureDef.shape = &shape;
-    fixtureDef.isSensor = true;  // Detect collision only
-    body->CreateFixture(&fixtureDef);
+	  
 }
 
-void Coins::Update(float deltaTime)
+void Coins::Update(float deltaTime) // Update animation frames for movement of enemy
 {
 	animation.Update(deltaTime);
     
- 
 }
 
-void Coins::Render(Renderer& renderer)
+void Coins::Render(Renderer& renderer) // Render enemy
 {
 	renderer.Draw(animation.GetTexture(), position, sf::Vector2f(1.f, 1.f));
 }

@@ -9,13 +9,13 @@ class Object
 private:
 	
 public:
-	virtual void Begin(){}
-	virtual void Update(float deltaTime){}
-	virtual void Render(Renderer& renderer){}
-
-
-	virtual ~Object() = default;
 	sf::Vector2f position{};
 	float angle{};
+
+	virtual void Begin() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render(Renderer& renderer) = 0;
+
+	virtual ~Object() = default;
 };
 

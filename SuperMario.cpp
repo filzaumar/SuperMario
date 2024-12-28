@@ -1,4 +1,3 @@
-
 #include "Game.h"
 #include "Camera.h"
 #include "Renderer.h"
