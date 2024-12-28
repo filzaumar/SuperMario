@@ -111,9 +111,7 @@ void RenderUI(Renderer& renderer)
 
     if (mario.isDead) {
         // Rendering game-over text
-        std::cout << "Before updating position: "
-            << gameOverText.getPosition().x << ", "
-            << gameOverText.getPosition().y << std::endl;
+     
         gameOverText.setCharacterSize(200.0f);
         sf::FloatRect textBounds = gameOverText.getLocalBounds();
         sf::Vector2f viewCenter = -camera.GetViewSize() / 2.0f + camera.GetViewSize() / 2.0f;
@@ -122,9 +120,7 @@ void RenderUI(Renderer& renderer)
         float yPos = viewCenter.y - (textBounds.height * gameOverText.getScale().y) / 2.0f;
 
         gameOverText.setPosition(xPos, yPos - 8.0f);
-        std::cout << "After updating position: "
-            << gameOverText.getPosition().x << ", "
-            << gameOverText.getPosition().y << std::endl;
+     
         renderer.target.draw(gameOverText);
     }
     else if (mario.getCoinCount() == 28) {
