@@ -17,18 +17,13 @@ sf::Texture Animation::GetTexture()
             throw std::runtime_error("No frames in animation");
         }
 
+
         float currentCumulativeTime = 0;
         for (size_t i = 0; i < frames.size(); ++i) {
             currentCumulativeTime += frames[i].time;
             if (time < currentCumulativeTime) {
-                // If it's the first frame, return the first texture
-                if (i == 0) {
-                    return frames[0].texture;
-                }
-                else {
-                    // Return the texture of the previous frame
-                    return frames[i - 1].texture;
-                }
+                // Return the current frame's texture
+                return frames[i].texture;
             }
         }
 

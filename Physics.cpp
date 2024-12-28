@@ -100,7 +100,7 @@ void Physics::DebugDraw(Renderer& renderer)
 	if (!debugDraw) //if debugdraw is null
 	{
 		debugDraw = new MyDebugDraw(renderer.target);
-		//debugDraw->SetFlags(b2Draw::e_centerOfMassBit);
+		debugDraw->SetFlags(b2Draw::e_shapeBit);
 		world.SetDebugDraw(debugDraw);
 	}
 	world.DebugDraw();

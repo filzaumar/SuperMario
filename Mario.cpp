@@ -13,7 +13,7 @@ bool Mario::isCollidingWithCoin(Coins& coin)
    float distance = std::sqrt(std::pow(position.x - coin.body->GetPosition().x, 2) +
       std::pow(position.y - coin.body->GetPosition().y, 2));
   
-      return distance < 0.5f;  // CHECKK !! (radius of Mario + coin)
+      return distance < 0.5f;  // (radius of Mario + coin)
 }
 
 bool Mario::isCollidingWithEnemy(Enemy& enemy)
@@ -21,8 +21,9 @@ bool Mario::isCollidingWithEnemy(Enemy& enemy)
     float distance = std::sqrt(std::pow(position.x - enemy.body->GetPosition().x, 2) +
         std::pow(position.y - enemy.body->GetPosition().y, 2));
 
-    return distance < 1.057f;  // CHECKK !! (radius of Mario + coin)
+    return distance < 1.5f;  //  (radius of Mario + enemy)
 }
+
 void Mario::Begin()
  {
     //Running animation for mario
@@ -74,7 +75,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
     float move = movementSpeed;
     runAnimation.Update(deltaTime);
-   
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         move *= 2;
 
@@ -83,15 +84,15 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         velocity.x += move;
-    
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         velocity.x -= move;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up ) && isGrounded)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && isGrounded)
         velocity.y = -jumpVelocity;
 
     body->SetLinearVelocity(velocity);
-   
+
     textureToDraw = runAnimation.GetTexture();
     if (velocity.x < 0.0f)
         isFacingLeft = true;
@@ -109,41 +110,26 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
     //Coin collection
 
-        for (auto& obj : objects) {
-       // Check if the object is a coin
+    for (auto& obj : objects) {
+        // Check if the object is a coin
         Coins* coin = dynamic_cast<Coins*>(obj);
-           if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
-               coin->Collect();  
-               coinCount++;      // Increase coin counter
-               //std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
-         }
-       }
-       
-        
-    // Enemy collision check
-        for (auto& obj : objects) {
-            Enemy* enemy = dynamic_cast<Enemy*>(obj);
-            if (enemy && !enemy->isDead && isCollidingWithEnemy(*enemy)) {
-                // Get positions to check if Mario is above enemy
-                float marioBottom = position.y + 0.43125f;  // Using your box dimensions
-                float enemyTop = enemy->body->GetPosition().y - 0.5f;  // Using enemy box height
+        if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
+            coin->Collect();
+            coinCount++;      // Increase coin counter
+            //std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
+        }
+    }
 
-                // If Mario is above the enemy
-                if (marioBottom < enemyTop) {
-                  //  enemy->Die();  // Kill enemy
-                    // Add jump boost
-                    b2Vec2 vel = body->GetLinearVelocity();
-                    vel.y = -jumpVelocity / 2;  // Small bounce
-                    body->SetLinearVelocity(vel);
-                }
-                else {
-                    Die();  // Kill Mario
-                }
-                std::cout << "Collision with enemy!" << std::endl;
-            }
+
+    // Enemy collision check
+    for (auto& obj : objects) {
+        Enemy* enemy = dynamic_cast<Enemy*>(obj);
+        if (enemy && isCollidingWithEnemy(*enemy)) {
+            Die();  // Mario dies on any contact with enemy
+            break;  // Exit the loop since Mario is dead
         }
 
-    
+
         // Remove collected coins
         objects.erase(
             std::remove_if(
@@ -152,7 +138,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                 [](Object* obj) {
                     Coins* coin = dynamic_cast<Coins*>(obj);
                     if (coin && coin->collected) {
-                     
+
                         delete coin; // Free memory
                         return true; // Remove from objects
                     }
@@ -161,15 +147,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
             objects.end());
 
 
-
-
-   
-
-       // coinText.setString("Coins: " + std::to_string(coinCount));
-        //sf::Vector2f viewPos = camera.position;
-        //coinText.setString("Coins: " + std::to_string(coinCount));
-        //coinText.setPosition(viewPos.x-15.f, viewPos.y-10.f);
-       
+    }
 }
 
 
@@ -199,21 +177,7 @@ void Mario::Die()
         // Optional: Play death animation
         textureToDraw = Resources::textures["dead.png"]; 
 
-      
-      /*gameOverText.setFont(font);
-        gameOverText.setString("GAME\nOVER!");
-        gameOverText.setCharacterSize(9); // Fixed larger size
-        gameOverText.setFillColor(sf::Color::Red);
-
-        sf::Vector2f viewPos = camera.position;
-        float viewWidth = camera.zoomLevel;
-        float viewHeight = camera.zoomLevel;
-
-        // Center the game over text
-        gameOverText.setPosition(
-            viewPos.x - (viewWidth / 2) + 0.5f,
-            viewPos.y - 11.0f
-        );*/ 
+    
     }
 }
 
@@ -221,7 +185,6 @@ void Mario::Die()
 void Mario::OnBeginContact()
 {
     isGrounded++;  // changed instead of bool so that when we enter tile, then enter next tile, we can still jump as grounded =1 instead of false
-    std::cout << "OBC" << std::endl;
 }
 
 void Mario::OnEndContact()
