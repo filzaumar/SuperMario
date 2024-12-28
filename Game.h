@@ -14,9 +14,13 @@
 #include<iostream>
 
 extern Camera camera;
+extern sf::Font font;
+extern sf::Text coinText;
+extern sf::Text gameOverText;
 
 void Begin();
 void Update(float deltaTime);
-void Render(  Renderer& renderer);
+void Render(Renderer& renderer);
+void RenderUI(Renderer& renderer);
 
 

@@ -18,7 +18,6 @@ public:
     void Begin() override;
     void Update(float deltaTime) override;
     void Render(Renderer& renderer) override;
-   // void Die();
     void OnCollision(void* other);
 
 private:

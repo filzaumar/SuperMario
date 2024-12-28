@@ -46,18 +46,12 @@ void Enemy::Update(float deltaTime)
 
     if (isDead) return;
 
-    // Move Goomba
+    // Move Enemy
     b2Vec2 velocity = body->GetLinearVelocity();
     velocity.x = direction * moveSpeed;  // Move left or right
     body->SetLinearVelocity(velocity);
 
   
-
-
-
-
-
-
      // Track time since last direction change
     static float timeSinceLastChange = 0;
     timeSinceLastChange += deltaTime;

@@ -5,6 +5,9 @@ Map map(1.0f); //map with cell size
 Camera camera(15.625f); // Create the camera with a zoom level
 Mario mario;
 std::vector<Object*>objects{};
+sf::Text coinText("Coins", font);
+sf::Text gameOverText("GAME\nOVER!", font);
+sf::Font font;
 
 void Begin()
 {
@@ -26,7 +29,26 @@ void Begin()
     }
 
  
-  //  Resources::textures[];
+
+    // Initialize text properties
+    if (!font.loadFromFile("resources/font/PixelOperator.ttf"))
+    {
+        std::cerr << "Failed to load font" << std::endl;
+        return;
+    }
+
+    coinText.setFont(font);
+    coinText.setFillColor(sf::Color::White);
+    coinText.setOutlineColor(sf::Color::Black);
+    coinText.setOutlineThickness(1.0f);
+    coinText.setScale(0.1f, 0.1f);
+
+    gameOverText.setFont(font);
+    gameOverText.setFillColor(sf::Color::Red);
+    gameOverText.setOutlineColor(sf::Color::Black);
+    gameOverText.setOutlineThickness(1.0f);
+    gameOverText.setScale(0.1f, 0.1f);
+   
 
     //Phisics Init() after loading resources
     Physics::Init();
@@ -73,4 +95,25 @@ void Render(Renderer& renderer)
     }
        
     Physics::DebugDraw(renderer);
+}
+
+void RenderUI(Renderer& renderer)
+{
+    coinText.setPosition(-camera.GetViewSize() /2.0f + sf::Vector2f(2.0f,1.0f));
+    coinText.setString("Coins: " + std::to_string(mario.getCoinCount()));
+    renderer.target.draw(coinText);
+    if (mario.isDead)
+    {
+       // gameOverText.setPosition(-camera.GetViewSize() / 2.0f + sf::Vector2f(10.0f, -5.0f));
+        gameOverText.setCharacterSize(200.0f);
+        sf::FloatRect textBounds = gameOverText.getLocalBounds();
+        sf::Vector2f viewCenter = -camera.GetViewSize() / 2.0f + camera.GetViewSize() / 2.0f;
+        // Calculate position to center the text
+        // Multiply by scale since the text is scaled down
+        float xPos = viewCenter.x - (textBounds.width * gameOverText.getScale().x) / 2.0f;
+        float yPos = viewCenter.y - (textBounds.height * gameOverText.getScale().y) / 2.0f;
+
+        gameOverText.setPosition(xPos, yPos-8.f);
+        renderer.target.draw(gameOverText);
+    }
 }

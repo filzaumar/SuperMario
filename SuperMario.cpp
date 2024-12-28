@@ -34,15 +34,19 @@ int main()
         // Update game state
         float deltaTime = deltaClock.restart().asSeconds();
         Update(deltaTime);
+        window.clear();
 
         // Apply the camera's view to the window
         window.setView(camera.GetView(window.getSize()));
 
-        // Clear the window
-        window.clear();
-
         // Render the scene
         Render(renderer);
+        window.setView(camera.GetUIView());
+        RenderUI(renderer);
+
+ 
+
+       
 
         // Display the rendered frame
         window.display();

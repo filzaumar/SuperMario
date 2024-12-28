@@ -1,21 +1,6 @@
 #pragma once
 #include "Mario.h"
-#include"Enemy.h"
-#include "Resources.h"
-#include"Physics.h"
-#include "Map.h"
-#include"Animation.h"
-#include"Renderer.h"
-#include "Camera.h"
-#include"Game.h"
-#include "Object.h"
-#include "Coins.h"
-#include <box2d/b2_body.h>
-#include<box2d/b2_polygon_shape.h>
-#include<box2d/b2_circle_shape.h>
-#include<box2d/b2_fixture.h>
-#include <box2d/b2_math.h> 
-#include<iostream>
+
 
 #define M_PI 3.142f
 
@@ -76,20 +61,7 @@ void Mario::Begin()
     fixtureDef.userData.pointer = (uintptr_t)this;
     fixtureDef.isSensor=true;
     body->CreateFixture(&fixtureDef);
-    
-
-    // Initialize text properties
-    if (!font.loadFromFile("resources/font/PixelOperator.ttf"))
-    {
-        std::cerr << "Failed to load font" << std::endl;
-        return;
-    }
-    coinText.setFont(font);
-    coinText.setFillColor(sf::Color::White);
-    coinText.setCharacterSize(20); // Fixed size
-    coinText.setStyle(sf::Text::Regular);
-
-
+ 
 }
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
@@ -98,6 +70,8 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
         body->SetLinearVelocity(b2Vec2(0, 0));  // Stop movement
         return;
     }
+
+
     float move = movementSpeed;
     runAnimation.Update(deltaTime);
    
@@ -141,7 +115,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
            if (coin && !coin->collected && isCollidingWithCoin(*coin)) {
                coin->Collect();  
                coinCount++;      // Increase coin counter
-               std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
+               //std::cout << "COLLISIONNNNN: Coin collected! Total: " << coinCount << std::endl;
          }
        }
        
@@ -156,7 +130,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
                 // If Mario is above the enemy
                 if (marioBottom < enemyTop) {
-                   // enemy->Die();  // Kill enemy
+                  //  enemy->Die();  // Kill enemy
                     // Add jump boost
                     b2Vec2 vel = body->GetLinearVelocity();
                     vel.y = -jumpVelocity / 2;  // Small bounce
@@ -191,10 +165,10 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
    
 
-        coinText.setString("Coins: " + std::to_string(coinCount));
-        sf::Vector2f viewPos = camera.position;
-        coinText.setString("Coins: " + std::to_string(coinCount));
-        coinText.setPosition(viewPos.x-15.f, viewPos.y-10.f);
+       // coinText.setString("Coins: " + std::to_string(coinCount));
+        //sf::Vector2f viewPos = camera.position;
+        //coinText.setString("Coins: " + std::to_string(coinCount));
+        //coinText.setPosition(viewPos.x-15.f, viewPos.y-10.f);
        
 }
 
@@ -211,6 +185,10 @@ void Mario::Draw(Renderer& renderer)
     {
         renderer.DrawText(gameOverText);
     }
+}
+int Mario::getCoinCount()
+{
+    return coinCount;
 }
 // Add the Die function
 void Mario::Die()
