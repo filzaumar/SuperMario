@@ -17,6 +17,7 @@ extern Camera camera;
 extern sf::Font font;
 extern sf::Text coinText;
 extern sf::Text gameOverText;
+extern sf::Text winText;
 
 void Begin();
 void Update(float deltaTime);

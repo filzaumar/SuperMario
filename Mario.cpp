@@ -67,7 +67,7 @@ void Mario::Begin()
 
 void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 {
-    if (isDead) {
+    if (isDead || getCoinCount()==2) {
         body->SetLinearVelocity(b2Vec2(0, 0));  // Stop movement
         return;
     }

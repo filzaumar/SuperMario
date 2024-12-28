@@ -17,6 +17,7 @@ int main()
     sf::Clock deltaClock;
 
     window.setFramerateLimit(60); //Shouldnt go below 60 for 2d games
+    
     // Initialize game resources
     Begin();
 
@@ -34,6 +35,7 @@ int main()
         // Update game state
         float deltaTime = deltaClock.restart().asSeconds();
         Update(deltaTime);
+
         window.clear();
 
         // Apply the camera's view to the window
@@ -42,12 +44,10 @@ int main()
         // Render the scene
         Render(renderer);
         window.setView(camera.GetUIView());
+        
+        //Render text for users 
         RenderUI(renderer);
-
- 
-
-       
-
+        
         // Display the rendered frame
         window.display();
     }

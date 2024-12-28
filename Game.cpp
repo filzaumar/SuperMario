@@ -7,6 +7,7 @@ Mario mario;
 std::vector<Object*>objects{};
 sf::Text coinText("Coins", font);
 sf::Text gameOverText("GAME\nOVER!", font);
+sf::Text winText("YOU\nWIN!", font);
 sf::Font font;
 
 void Begin()
@@ -49,6 +50,11 @@ void Begin()
     gameOverText.setOutlineThickness(1.0f);
     gameOverText.setScale(0.1f, 0.1f);
    
+    winText.setFont(font);
+    winText.setFillColor(sf::Color::Yellow);
+    winText.setOutlineColor(sf::Color::Black);
+    winText.setOutlineThickness(1.0f);
+    winText.setScale(0.1f, 0.1f);
 
     //Phisics Init() after loading resources
     Physics::Init();
@@ -102,18 +108,35 @@ void RenderUI(Renderer& renderer)
     coinText.setPosition(-camera.GetViewSize() /2.0f + sf::Vector2f(2.0f,1.0f));
     coinText.setString("Coins: " + std::to_string(mario.getCoinCount()));
     renderer.target.draw(coinText);
-    if (mario.isDead)
-    {
-       // gameOverText.setPosition(-camera.GetViewSize() / 2.0f + sf::Vector2f(10.0f, -5.0f));
+
+    if (mario.isDead) {
+        // Rendering game-over text
+        std::cout << "Before updating position: "
+            << gameOverText.getPosition().x << ", "
+            << gameOverText.getPosition().y << std::endl;
         gameOverText.setCharacterSize(200.0f);
         sf::FloatRect textBounds = gameOverText.getLocalBounds();
         sf::Vector2f viewCenter = -camera.GetViewSize() / 2.0f + camera.GetViewSize() / 2.0f;
-        // Calculate position to center the text
-        // Multiply by scale since the text is scaled down
+
         float xPos = viewCenter.x - (textBounds.width * gameOverText.getScale().x) / 2.0f;
         float yPos = viewCenter.y - (textBounds.height * gameOverText.getScale().y) / 2.0f;
 
-        gameOverText.setPosition(xPos, yPos-8.f);
+        gameOverText.setPosition(xPos, yPos - 8.0f);
+        std::cout << "After updating position: "
+            << gameOverText.getPosition().x << ", "
+            << gameOverText.getPosition().y << std::endl;
         renderer.target.draw(gameOverText);
+    }
+    else if (mario.getCoinCount() == 2) {
+        // Rendering win text
+        winText.setCharacterSize(200.0f);
+        sf::FloatRect textBounds = winText.getLocalBounds();
+        sf::Vector2f viewCenter = -camera.GetViewSize() / 2.0f + camera.GetViewSize() / 2.0f;
+
+        float xPos = viewCenter.x - (textBounds.width * winText.getScale().x) / 2.0f;
+        float yPos = viewCenter.y - (textBounds.height * winText.getScale().y) / 2.0f;
+
+        winText.setPosition(xPos, yPos - 8.0f);
+        renderer.target.draw(winText);
     }
 }
