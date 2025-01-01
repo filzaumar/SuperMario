@@ -102,9 +102,17 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
         isFacingLeft = false;
     else
         textureToDraw = Resources::textures["mario.png"];
-    if (!isGrounded)
-        textureToDraw = Resources::textures["jump.png"];
-
+        currentTextureName = "mario.png";
+        if (!isGrounded && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+        {
+            textureToDraw = Resources::textures["jump.png"];
+            currentTextureName = "jump.png";
+        }
+    else if (!isGrounded)
+    {
+        textureToDraw = Resources::textures["jump 1.png"];
+        currentTextureName = "jump 1.png";
+    }
     // Updating position
     position = sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
     angle = body->GetAngle() * 180.f / M_PI;
@@ -138,6 +146,7 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
                     if (coin && coin->collected) {
 
                         delete coin; // Free memory
+
                         return true; // Remove from objects
                     }
                     return false;
@@ -148,7 +157,10 @@ void Mario::Update(float deltaTime, std::vector<Object*>& objects)
 
 void Mario::Draw(Renderer& renderer) // Draw Mario
 { 
-    renderer.Draw(textureToDraw, position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
+    if (currentTextureName == "jump.png")
+        renderer.Draw(textureToDraw, position, sf::Vector2f(isFacingLeft ? -4.0f : 4.0f, 4.5f), angle);
+    else
+        renderer.Draw(textureToDraw, position, sf::Vector2f(isFacingLeft ? -1.0f : 1.0f, 1.5625f), angle);
 }
 
 int Mario::getCoinCount() //Returns the current coins collected
@@ -160,7 +172,7 @@ void Mario::Die() // Function for mario to die
 {
     if (!isDead) {
         isDead = true;
-        std::cout << "Mario died!" << std::endl;
+       // std::cout << "Mario died!" << std::endl;
         textureToDraw = Resources::textures["dead.png"];   
     }
 }

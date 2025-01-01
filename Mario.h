@@ -36,6 +36,7 @@ public:
 	sf::Vector2f position{};
 	bool isDead = false;
 	float angle{};
+	std::string currentTextureName;
 
 	void Begin();
 	void Update(float deltaTime, std::vector<Object*>& objects);

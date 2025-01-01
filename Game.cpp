@@ -16,7 +16,7 @@ void Begin()
     // Load the texture
     for (auto& file : std::filesystem::directory_iterator("./resources/textures/"))
     {
-        if (file.is_regular_file() && file.path().extension() == ".png" || file.path().extension()==".jpg")
+        if (file.is_regular_file() && file.path().extension() == ".png" || file.path().extension()==".jpg" || file.path().extension() == ".jpeg")
         {
             Resources::textures[file.path().filename().string()].loadFromFile(file.path().string());
             if (!Resources::textures[file.path().filename().string()].loadFromFile(file.path().string())) {
@@ -28,7 +28,6 @@ void Begin()
             }
         }
     }
-
  
 
     // Initialize text properties
@@ -66,7 +65,7 @@ void Begin()
 
     mario.position = map.InitFromImage(image, objects);
     {
-        std::cout << "maarioooo" << mario.position.x << mario.position.y << std::endl;
+       // std::cout << "maarioooo" << mario.position.x << mario.position.y << std::endl;
     }
     mario.Begin();
     for (auto& object : objects)
