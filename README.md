@@ -2,7 +2,7 @@
 
 This project is a C++ implementation of a **Super Mario-style game**, developed using **Object-Oriented Programming (OOP)** principles and libraries such as **SFML** and **Box2D**. The player controls Mario, navigating platforms, collecting coins, and avoiding enemies. The game ends in **victory** (all coins collected) or **defeat** (collision with an enemy).
 
-## 🎯 Objectives
+## Objectives
 
 - Apply OOP concepts to game development.
 - Create interactive gameplay using SFML and Box2D.
@@ -45,13 +45,13 @@ This project is a C++ implementation of a **Super Mario-style game**, developed 
 ![FlowChart](https://github.com/user-attachments/assets/ce24d692-8da0-48be-9de8-5ff98b3c8601)
 
 
-## 📘 How to Run
+## How to Run
 
 1. Install **Visual Studio** with **C++ development tools**.
 2. Download and configure **SFML** and **Box2D** libraries.
 3. Open the `.sln` project file.
 4. Build and run the project.
 
-## 📄 Report
+## Report
 
 A detailed project report is uploaded.
